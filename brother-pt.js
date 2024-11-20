@@ -314,8 +314,7 @@ export class BrotherPrinter {
     await this.write(new Uint8Array([0x1b, 0x69, 0x21, 0x00]));
 
     // Print information command
-    const numberOfBytes = raster.reduce((sum, chunk) => sum + chunk.length, 0);
-    const dataLength = numberOfBytes >> 4;
+    const dataLength = columns.length;
     const printInfoCmd = new Uint8Array([
       0x1b,
       0x69,
