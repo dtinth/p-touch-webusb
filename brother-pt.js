@@ -314,6 +314,7 @@ export class BrotherPrinter {
     await this.write(new Uint8Array([0x1b, 0x69, 0x21, 0x00]));
 
     // Print information command
+    const rasterBits = raster.length * LINE_LENGTH_BYTES;
     const printInfoCmd = new Uint8Array([
       0x1b,
       0x69,
@@ -323,10 +324,10 @@ export class BrotherPrinter {
       this.mediaWidth,
       0x00,
       // Data length (4 bytes little endian)
-      (raster.length >> 0) & 0xff,
-      (raster.length >> 8) & 0xff,
-      (raster.length >> 16) & 0xff,
-      (raster.length >> 24) & 0xff,
+      (rasterBits >> 0) & 0xff,
+      (rasterBits >> 8) & 0xff,
+      (rasterBits >> 16) & 0xff,
+      (rasterBits >> 24) & 0xff,
       0x00,
       0x00,
     ]);
